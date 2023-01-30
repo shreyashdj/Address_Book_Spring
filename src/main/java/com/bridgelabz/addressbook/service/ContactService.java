@@ -38,7 +38,7 @@ public class ContactService implements IContactService {
             Contact contact = new Contact(contactDTO);
             contact.setCreatedOn(LocalDateTime.now());
             contactRepository.save(contact);
-            emailService.sendEmail(contact.getEmail(), "Contact Added successfully!!", "   ---- Contact Details ----" + contact.toString());
+            emailService.sendEmail(contact.getEmail(), "Contact Added successfully!!", "   ---- Contact Details ----\n" + contact.toString());
             return contact;
 //        } else {
 //            throw new ContactException("Please enter valid State name");
@@ -52,8 +52,9 @@ public class ContactService implements IContactService {
                 contact.setContactId(contactId);
                 contact.setCreatedOn(contactRepository.findById(contactId).get().getCreatedOn());
                 contact.setModifiedOn(LocalDateTime.now());
-                emailService.sendEmail(contact.getEmail(), "Contact Updated successfully!!", "    ---- Contact Details ----\n\n" + contact.toString());
-            return contactRepository.save(contact);
+                contactRepository.save(contact);
+                emailService.sendEmail(contact.getEmail(), "Contact Updated successfully!!", "    ---- Contact Details ----\n" + contact.toString());
+            return contact;
 //            } else {
 //                throw new ContactException("Please enter valid State name");
 //            }

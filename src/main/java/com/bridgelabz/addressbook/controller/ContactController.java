@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/AddressBook")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ContactController {
     @Autowired
     IContactService contactService;
